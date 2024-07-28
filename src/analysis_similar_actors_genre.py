@@ -24,3 +24,11 @@ Using the imbd_movies dataset:
 '''
 
 #Write your code below
+
+actor_genre_count = {}
+
+
+
+
+
+nm0005517

@@ -9,6 +9,9 @@ import analysis_similar_actors_genre
 
 # Ingest and save the imbd_movies dataset
 
+url = 'https://raw.githubusercontent.com/cbuntain/umd.inst414/main/data/imdb_movies_2000to2022.prolific.json'
+save_path = '/Users/taliyahmonae/Desktop/School/INST414/problem-set-1/data'
+
 
 
 # Call functions / instanciate objects from the two analysis .py files
