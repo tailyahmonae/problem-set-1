@@ -25,10 +25,49 @@ Using the imbd_movies dataset:
 
 #Write your code below
 
-actor_genre_count = {}
+import numpy as np
+import pandas as pd
+import json
+from sklearn.metrics import pairwise_distances
+from sklearn.metrics import DistanceMetric
+from datetime import datetime
 
 
+def create_genre_feature_matrix(filepath):
+    """
+    Create the feature matrix
+
+    Args:
+        filepath (str): Path to the JSON file containing movie data
+
+    Returns:
+        pd.DataFrame: DataFrame where rows are actors, columns are genres,
+                      and values are counts of appearances in each genre
+    """
+    genre_count = {}
+    actor_genres = {}
+
+    with open(filepath, 'r') as in_file:
+        for line in in_file:
+            movie = json.loads(line)
+            genres = movie.get('genres', [])
+            actors = movie.get('actors', [])
+            
+            for actor_id, actor_name in actors:
+                if actor_name not in actor_genres:
+                    actor_genres[actor_name] = {genre: 0 for genre in genres}
+                
+                for genre in genres:
+                    actor_genres[actor_name][genre] += 1
+                    
+# Create DataFrame from the actor_genres dictionary
+    all_genres = set(g for genres in actor_genres.values() for g in genres)
+    feature_matrix = pd.DataFrame(
+        [{**actor_genres.get(actor, {}), **{genre: 0 for genre in all_genres}}
+         for actor in actor_genres],
+        index=actor_genres.keys()
+    ).fillna(0)
+
+    return feature_matrix
 
 
-
-nm0005517

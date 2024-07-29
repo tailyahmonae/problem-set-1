@@ -36,6 +36,7 @@ with open(filepath, 'r') as in_file:
         
         i = 0 #counter
         for left_actor_id,left_actor_name in this_movie['actors']:
+            left_actor_id, left_actor_name = this_movie['actors'][i]
             for right_actor_id,right_actor_name in this_movie['actors'][i+1:]:
 
                 # Get the current weight, if it exists
